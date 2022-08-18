@@ -5,67 +5,90 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Address Book Practice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap">
     <link rel="stylesheet" href="../css/new_addressbook.css">
-    <title>Addressbook</title>
+    <script type="text/javascript" src="../js/AddFormValidation.js"></script>
+    <script type="text/javascript" src="../js/AddressBook.js"></script>
 </head>
+<style>
+
+</style>
 
 <body>
+    <!-- UC1 Begin with creating an Address Book Form UI-->
     <header class="header-content header">
         <div class="logo-content">
             <img src="../assets/aadressbookimage.png" alt="logo">
-            <div><span class=" book-text">ADDRESS</span><br>
+            <div>
+                <span class="book-text">ADDRESS</span><br>
                 <span class="book-text add-book">BOOK</span>
-                
             </div>
         </div>
     </header>
-    <div class="form-content">
-        <form class="form" action="#">
-            <div class="form-head">
-                PERSON ADDRESS FORM
-                <span class="close">&times;</span>
-            </div>
-            <div class="row-content">
-                <label for="name" class="label text"></label>
-                <input type="text" class="input" id="name" name="name" placeholder="Annika M Ramos" required>
-                <error-output class="text-error" for="text"></error-output>
-            </div>
-            <div class="row-content">
-                <label class="label text" for="Address"></label>
-                <input id="address" name="address" class="input" placeholder="Address" style="height: 100px;" required>
-            </div>
-            <div class="row-content">
-                <label class="label text" for="selectCity"></label>
-                <div>
-                    <label class="label text" for="City"></label><br>
-                    <select name="city" id="city">
-                        <option value="0">Select City</option>
-                        <option value="1">Pune</option>
-                        <option value="2">Betul</option>
-                        <option value="3">Bhopal</option>
-                        <option value="4">Indore</option>
-                        <option value="5">Bilaspur</option>
-                        <option value="6">Jabalpur</option>
-                        <option value="7">Raipur</option>
-                        <option value="8">Durg</option>
-                    </select>
-                    <select name="state" id="state">
-                        <option value="0">Select State</option>
-                        <option value="1">Maharashtra</option>
-                        <option value="2">Madhya Pradesh</option>
-                        <option value="3">Chhattisgarh</option>
-                    </select>
-                    <label class="label text" for="zip-code"></label>
-                    <input class="zip-code" type="zip-code" id="zip-code" placeholder="Zip Code" name="zip-code" required>
-                </div>
-            </div>
-            <div class="row-content">
-                <label class="label text" for="phone"></label>
-                <input class="input" type="phone" id="phone" name="phone" placeholder="Phone Number" required>
-            </div>           
 
+    <!-- UC2 Ability to add Form Header-->
+    <div class="form-content">
+        <form class="form" action="#" onsubmit="save(event);" onreset="reset();">
+            <div class="form-head">
+                <span class="form-head-text">PERSON ADDRESS FORM</span>
+                <span class="cross-icon">
+                    <ion-icon class="close-circle" name="close-circle"></ion-icon>
+                </span>
+            </div>
+
+            <!-- UC3 Add Form Input Fields to the Address Book Form UI-->
+            <div class="body">
+                <label class="label text" for="name">Full Name</label></br>&nbsp;
+                <input class="input" type="text" id="name" name="name" required>
+                <error-output class="text-error"></error-output>
+
+                <label class="label-text-phone" for="phone">Phone Number</label></br>&nbsp;
+                <input class="input" type="tel" id="phone" name="phone" required>
+                <error-output class="phone-error"></error-output>
+
+                <label class="label text" for="address">Address</label></br>&nbsp;
+                <textarea id="address" class="input" name="address" style="height: 100px; "></textarea>
+                <error-output class="address-error"></error-output>
+
+                <div class="row-content">
+                    <div class="label-city">
+                        <label class="city" for="city">City</label><br>&nbsp;
+                        <select id="city" name="city">
+                        <option value="0">Select City</option>
+                        <option value="1 ">Ambala</option>
+                        <option value="2 ">Gurgaon</option>
+                        <option value="3 ">Noida</option>
+                        <option value="4 ">Shimla</option>
+                        <option value="5 ">Chennai</option>  
+                    </select>
+                    </div>
+                    <div class="label-state">
+                        <label class="state" for="state">State</label><br>&nbsp;
+                        <select id="state" name="state">
+                        <option value="">Select State</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Tamilnadu">Tamilnadu</option>
+                    </select>
+                    </div>
+                    <div class="label-zip">
+                        <label class="zip" for="zipcode">Zipcode</label></br>&nbsp;
+                        <input class="input" id="zipcode " name="zipcode" placeholder="Enter zipcode here"></input>
+                    </div>
+                </div>
+
+               
+            </div>
+
+        </form>
     </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
+   
