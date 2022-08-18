@@ -26,6 +26,45 @@
                 PERSON ADDRESS FORM
                 <span class="close">&times;</span>
             </div>
+            <div class="row-content">
+                <label for="name" class="label text"></label>
+                <input type="text" class="input" id="name" name="name" placeholder="Annika M Ramos" required>
+                <error-output class="text-error" for="text"></error-output>
+            </div>
+            <div class="row-content">
+                <label class="label text" for="Address"></label>
+                <input id="address" name="address" class="input" placeholder="Address" style="height: 100px;" required>
+            </div>
+            <div class="row-content">
+                <label class="label text" for="selectCity"></label>
+                <div>
+                    <label class="label text" for="City"></label><br>
+                    <select name="city" id="city">
+                        <option value="0">Select City</option>
+                        <option value="1">Pune</option>
+                        <option value="2">Betul</option>
+                        <option value="3">Bhopal</option>
+                        <option value="4">Indore</option>
+                        <option value="5">Bilaspur</option>
+                        <option value="6">Jabalpur</option>
+                        <option value="7">Raipur</option>
+                        <option value="8">Durg</option>
+                    </select>
+                    <select name="state" id="state">
+                        <option value="0">Select State</option>
+                        <option value="1">Maharashtra</option>
+                        <option value="2">Madhya Pradesh</option>
+                        <option value="3">Chhattisgarh</option>
+                    </select>
+                    <label class="label text" for="zip-code"></label>
+                    <input class="zip-code" type="zip-code" id="zip-code" placeholder="Zip Code" name="zip-code" required>
+                </div>
+            </div>
+            <div class="row-content">
+                <label class="label text" for="phone"></label>
+                <input class="input" type="phone" id="phone" name="phone" placeholder="Phone Number" required>
+            </div>           
+
     </div>
 </body>
 

@@ -80,3 +80,41 @@ body {
 .close{
     float:right;
 }
+
+.row-content {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+    align-items: center;
+    border: 0px solid green;
+    margin-top: 30px;
+}
+
+.label {
+    min-width: 10px;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+.text {
+    font-size: 16px;
+    color: #42525f;
+    opacity: 1;
+    font-family: Roboto;
+}
+
+.error-output{
+    font-size:12px;
+    font-style:italic;
+    color:red;
+    }
+.input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
