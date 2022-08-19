@@ -1,26 +1,28 @@
+let addressBookObject = {};
+let isUpdate = false;
 window.addEventListener('DOMContentLoaded', (event) => {
-    validateInputs();
+    validateName();
+    validatePhone();
+    validateAddress();
 })
 
-function validateInputs() {
+function validateName() {
     const name = document.querySelector('#name');
-    const phone = document.querySelector('#phone');
-    const address = document.querySelector('#address');
-    const nameError = document.querySelector('.text-error');
-    const phoneError = document.querySelector('.phone-error');
-    const addressError = document.querySelector('.address-error');
-
-    name.addEventListener('input', function() {
+    const textError = document.querySelector('.text-error');
+    name.addEventListener('input', function () {
         try {
             let personData = new AddressBook();
             personData.name = name.value;
-            nameError.textContent = "";
+            textError.textContent = "";
         } catch (e) {
-            nameError.textContent = e;
+            textError.textContent = e;
         }
     });
-
-    phone.addEventListener('input', function() {
+}
+function validatePhone() {
+    const phone = document.querySelector('#phone');
+    const phoneError = document.querySelector('.phone-error');
+    phone.addEventListener('input', function () {
         try {
             let personData = new AddressBook();
             personData.phone = phone.value;
@@ -29,8 +31,12 @@ function validateInputs() {
             phoneError.textContent = e;
         }
     });
+}
 
-    address.addEventListener('input', function() {
+function validateAddress() {
+    const address = document.querySelector('#address');
+    const addressError = document.querySelector('.address-error');
+    address.addEventListener('input', function () {
         try {
             let personData = new AddressBook();
             personData.address = address.value;
@@ -40,35 +46,55 @@ function validateInputs() {
         }
     });
 }
-
-//Declaring save method
+//UC8 Ability to Add the Address Book Entry into an Address Book List and store it in Local Storage
 const save = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    let addressBook = createAddressBook();
-    addAndUpdateLocalStorage(addressBook); //Data store in local storage
-    alert("Data is being added successfully " + addressBook._name);
-    window.location.replace(Site_Properties.home);
+    try {
+        event.preventDefault();
+        event.stopPropagation();
+        let personAddressBook = setAddressBookObject();
+        console.log(personAddressBook);
+        createAndUpdateStorage(personAddressBook);
+        alert("Data Stored With Name: " + personAddressBook._name);
+        window.location.replace(Site_Properties.home);
+    } catch (e) {
+        console.log(e)
+    }
 }
 
-const createAddressBook = () => {
+const setAddressBookObject = () => {
     let addressBook = new AddressBook();
-    addressBook.name = getInputValueId("#name");
-    addressBook.phone = getInputValueId("#phone");
-    addressBook.address = getInputValueId("#address");
-    addressBook.city = getSelectedValue('[name=city]').pop();
-    addressBook.state = getSelectedValue('[name=state]').pop();
-    addressBook.zipcode = getInputValueId("#zipcode");
+
+    addressBook.name = getInputValueId('#name');
+    addressBook.phone = getInputValueId('#phone')
+    addressBook.address = getInputValueId('#address')
+    addressBook.city = getInputValueId('#city')
+    addressBook.state = getInputValueId('#state');
+    addressBook.zipcode = getInputValueId('#zipcode');
+    addressBook.id = addressBookObject._id;
     return addressBook;
+}
+//UC8 Ability to Add the Address Book Entry into an Address Book List and store it in Local Storage
+const createAndUpdateStorage = (personData) => {
+    let dataList = JSON.parse(localStorage.getItem("AddressBookList"));
+    if (dataList) {
+        let existingAddressData = dataList.find(data => data._id == personData.id);
+        if (!existingAddressData) {
+            personData.id = createNewBookId();
+            dataList.push(personData);
+        } else {
+            const index = dataList.map(add => add._id).indexOf(personData.id);
+            dataList.splice(index, 1, personData);
+        }
+    } else {
+        personData.id = createNewBookId();
+        dataList = [personData];
+    }
+    localStorage.setItem('AddressBookList', JSON.stringify(dataList));
 }
 
 const getInputValueId = (id) => {
-    return document.querySelector(id).value;
-}
-
-const setTextValue = (id, message) => {
-    const textError = document.querySelector(id);
-    textError.textContent = message;
+    let value = document.querySelector(id).value;
+    return value;
 }
 
 const getSelectedValue = (propertyValue) => {
@@ -82,18 +108,9 @@ const getSelectedValue = (propertyValue) => {
     return setItem;
 }
 
-//Data storing in local storage
-const addAndUpdateLocalStorage = (persons) => {
-    let personList = JSON.parse(localStorage.getItem("AddressBookList"));
-    if (personList != undefined) {
-        personList.push(persons);
-    } else {
-        personList = [persons];
-    }
-    localStorage.setItem('AddressBookList', JSON.stringify(personList));
-}
-
-//Reset method
-const reset = () => {
-    alert("Reset button");
+const createNewBookId = () => {
+    let bookId = localStorage.getItem('BookId');
+    bookId = !bookId ? 1 : (parseInt(bookId) + 1).toString();
+    localStorage.setItem('BookId', bookId);
+    return bookId;
 }
